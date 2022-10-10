@@ -1,8 +1,7 @@
-from email import message
 import random
 from datetime import datetime
 import requests
-
+from number import number
 
 TODAY = datetime.now()
 date = TODAY
@@ -93,6 +92,10 @@ gym = work_out(day)
 my_chore = chores(day)
 food = eating()
 
-life_list = { "Work Out" : gym, "Eat right": food, "Do chores": my_chore}
-to_say = "Good morning Mr.Will This is life bot reaching out with your daily maintenance: \n" + f"First: Your meals for today are {food}"
-print(to_say)
+to_say = f"Good morning Mr.Will This is life bot reaching out to you on {date} with your daily maintenance: \n" + f"First: Your meals for today are {food}\n" + f"Next: Today at the gym you will be doing {gym}\n" + f"Lastly: The chores you need to get done today are {my_chore}"
+
+resp = requests.post('https://textbelt.com/text', {
+    'phone': number,
+    'message': to_say,
+    'key': 'textbelt'
+})
