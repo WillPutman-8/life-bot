@@ -1,5 +1,7 @@
+from email import message
 import random
 from datetime import datetime
+import requests
 
 
 TODAY = datetime.now()
@@ -49,30 +51,34 @@ def work_out(day_of_week):
         for i in range(5):
             x = random.choice(use)
             work.append(x)
-            use.pop(x)
+            use.remove(x)
     else:
         work.append(weekend)
 
     return work
             
 def chores(day_of_week):
+
     todo = []
     chore_list = ["clean and vacume living room", "wash dishes", "clean bathroom", "take out trash", "clean tub", "clean toilet" ]
     monday_list = ["clean and vacume room", "clean out car", "meal prep"]
     weekend = "No chores Since you had to work all day today bud"
     if day_of_week == 1:
         todo.append(monday_list)
+
     elif day_of_week > 1 and day_of_week < 6:
+
         for i in range(3):
             x = random.choice(chore_list)
             todo.append(x)
-            chore_list.pop(x)
+            chore_list.remove(x)
     else:
         todo.append(weekend)
     
     return todo
          
 def eating():
+
     x = random.randint(0,501)
     if x != 500:
         meal = "Breakfast drink, tuna or chicken for lunch and dinner"
@@ -87,6 +93,6 @@ gym = work_out(day)
 my_chore = chores(day)
 food = eating()
 
-print(gym)
-print(my_chore)
-print(food)
+life_list = { "Work Out" : gym, "Eat right": food, "Do chores": my_chore}
+to_say = "Good morning Mr.Will This is life bot reaching out with your daily maintenance: \n" + f"First: Your meals for today are {food}"
+print(to_say)
